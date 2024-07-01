@@ -68,7 +68,7 @@ const AdminDashboard = () => {
   const handleDeleteUser = async (userId) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete('https://backend-smha.onrender.com/api/admin/users/${userId}', {
+      await axios.delete(`https://backend-smha.onrender.com/api/admin/users/${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
