@@ -19,7 +19,7 @@ const AdminDashboard = () => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem('token');
-        const usersResponse = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/admin/users`, {
+        const usersResponse = await axios.get('https://backend-smha.onrender.com/api/admin/users', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -32,7 +32,7 @@ const AdminDashboard = () => {
           console.error('Unexpected users response format:', usersResponse.data);
         }
   
-        const adminResponse = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/admin/profile`, {
+        const adminResponse = await axios.get('https://backend-smha.onrender.com/api/admin/profile', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -51,7 +51,7 @@ const AdminDashboard = () => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem('token');
-        const servicesResponse = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/admin/services`, {
+        const servicesResponse = await axios.get('https://backend-smha.onrender.com/api/admin/services', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -68,7 +68,7 @@ const AdminDashboard = () => {
   const handleDeleteUser = async (userId) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/api/admin/users/${userId}`, {
+      await axios.delete('https://backend-smha.onrender.com/api/admin/users/${userId}', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -82,7 +82,7 @@ const AdminDashboard = () => {
   const handleDeleteService = async (serviceId) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/api/admin/services/${serviceId}`, {
+      await axios.delete(`https://backend-smha.onrender.com/api/admin/services/${serviceId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -117,7 +117,7 @@ const AdminDashboard = () => {
           <MdNotifications className="w-6 h-6 mr-2 cursor-pointer" />
           {adminProfilePhoto ? (
             <img
-              src={`${import.meta.env.VITE_API_BASE_URL}/${adminProfilePhoto}`}
+              src={`https://backend-smha.onrender.com/${adminProfilePhoto}`}
               alt="Admin Profile"
               className="w-10 h-10 rounded-full cursor-pointer object-cover"
               onError={(e) => {
@@ -193,7 +193,7 @@ const AdminDashboard = () => {
                     <td className="border-b border-gray-300 text-sm flex justify-center outline-none mt-3">
                       {user.profilePhoto ? (
                         <img
-                          src={`${import.meta.env.VITE_API_BASE_URL}/${user.profilePhoto}`}
+                          src={`https://backend-smha.onrender.com/${user.profilePhoto}`}
                           alt="Profile"
                           className="w-8 h-8 rounded-full object-cover"
                           onError={(e) => {

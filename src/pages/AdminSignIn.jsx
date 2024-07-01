@@ -10,7 +10,7 @@ const AdminSignIn = () => {
 
   const handleSignIn = async () => {
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/admin/signin`, { email, password });
+      const response = await axios.post('https://backend-smha.onrender.com/api/admin/signin', { email, password });
       const {token } = response.data;
 
       localStorage.setItem("token", token)
