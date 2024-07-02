@@ -135,7 +135,7 @@ const AdminDashboard = () => {
       {/* Navbar */}
       <div className="flex justify-between items-center bg-gray-800 text-white px-4 py-2 fixed top-0 w-full z-10">
         <div className="flex items-center ml-16">
-          <img src="/src/assets/logo.jpg" alt="Logo" className="w-10 h-10 mr-2 rounded-full" />
+          <img src="images/logo.jpg" alt="Logo" className="w-10 h-10 mr-2 rounded-full" />
           <span className="text-lg font-bold">Event Expert</span>
         </div>
         <div className="flex-grow flex justify-center mx-4">

@@ -53,7 +53,7 @@ const AdminSignUp = () => {
       <div className="flex flex-col sm:flex-row w-full max-w-7xl bg-white rounded-lg shadow-lg overflow-hidden">
         <div className="sm:w-1/2 flex items-center justify-center p-4 sm:p-8">
           <div className="relative w-full h-full">
-            <img src="/public/images/signupPic.avif" alt="SignUp" className="h-64 sm:h-96 md:h-[750px] w-full object-cover rounded-lg" />
+            <img src="images/signupPic.avif" alt="SignUp" className="h-64 sm:h-96 md:h-[750px] w-full object-cover rounded-lg" />
             <div className="absolute bottom-0 left-0 right-0 text-center text-white bg-black bg-opacity-5 py-4">
               <p className="font-bold text-5xl">Join 35k+ web professionals &</p>
               <p className="font-bold text-5xl">build your website</p>
