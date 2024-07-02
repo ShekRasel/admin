@@ -12,6 +12,7 @@ import { RiUserAddFill, RiLoginBoxFill, RiUserSharedFill } from 'react-icons/ri'
 const AdminDashboard = () => {
   const [users, setUsers] = useState([]);
   const [services, setServices] = useState([]);
+  const [contacts, setContacts] = useState([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false); // Sidebar initially closed
   const [adminProfilePhoto, setAdminProfilePhoto] = useState(null); // Admin profile photo
 
@@ -19,7 +20,7 @@ const AdminDashboard = () => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem('token');
-        const usersResponse = await axios.get('https://backend-smha.onrender.com/api/admin/users', {
+        const usersResponse = await axios.get('https://backend-8cip.onrender.com/api/admin/users', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -32,7 +33,7 @@ const AdminDashboard = () => {
           console.error('Unexpected users response format:', usersResponse.data);
         }
   
-        const adminResponse = await axios.get('https://backend-smha.onrender.com/api/admin/profile', {
+        const adminResponse = await axios.get('https://backend-8cip.onrender.com/api/admin/profile', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -51,7 +52,7 @@ const AdminDashboard = () => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem('token');
-        const servicesResponse = await axios.get('https://backend-smha.onrender.com/api/admin/services', {
+        const servicesResponse = await axios.get('https://backend-8cip.onrender.com/api/admin/services', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -65,10 +66,28 @@ const AdminDashboard = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const fetchContacts = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const contactsResponse = await axios.get(`https://backend-8cip.onrender.com/api/admin/contacts`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setContacts(contactsResponse.data);
+      } catch (error) {
+        console.error('Error fetching contacts:', error);
+      }
+    };
+
+    fetchContacts();
+  }, []);
+
   const handleDeleteUser = async (userId) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`https://backend-smha.onrender.com/api/admin/users/${userId}`, {
+      await axios.delete(`https://backend-8cip.onrender.com/api/admin/users/${userId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -82,7 +101,7 @@ const AdminDashboard = () => {
   const handleDeleteService = async (serviceId) => {
     try {
       const token = localStorage.getItem('token');
-      await axios.delete(`https://backend-smha.onrender.com/api/admin/services/${serviceId}`, {
+      await axios.delete(`https://backend-8cip.onrender.com/api/admin/services/${serviceId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -90,6 +109,20 @@ const AdminDashboard = () => {
       setServices(services.filter((service) => service._id !== serviceId));
     } catch (error) {
       console.error('Error deleting service:', error);
+    }
+  };
+
+  const handleDeleteContact = async (contactId) => {
+    try {
+      const token = localStorage.getItem('token');
+      await axios.delete(`https://backend-8cip.onrender.com/api/admin/contacts/${contactId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setContacts(contacts.filter((contact) => contact._id !== contactId));
+    } catch (error) {
+      console.error('Error deleting contact:', error);
     }
   };
 
@@ -117,7 +150,7 @@ const AdminDashboard = () => {
           <MdNotifications className="w-6 h-6 mr-2 cursor-pointer" />
           {adminProfilePhoto ? (
             <img
-              src={`https://backend-smha.onrender.com/${adminProfilePhoto}`}
+              src={`https://backend-8cip.onrender.com/${adminProfilePhoto}`}
               alt="Admin Profile"
               className="w-10 h-10 rounded-full cursor-pointer object-cover"
               onError={(e) => {
@@ -193,7 +226,7 @@ const AdminDashboard = () => {
                     <td className="border-b border-gray-300 text-sm flex justify-center outline-none mt-3">
                       {user.profilePhoto ? (
                         <img
-                          src={`https://backend-smha.onrender.com/${user.profilePhoto}`}
+                          src={`https://backend-8cip.onrender.com/${user.profilePhoto}`}
                           alt="Profile"
                           className="w-8 h-8 rounded-full object-cover"
                           onError={(e) => {
@@ -241,6 +274,43 @@ const AdminDashboard = () => {
                     <td className="border-b border-gray-300 text-sm text-center">
                       <button
                         onClick={() => handleDeleteService(service._id)}
+                        className="bg-red-500 text-white px-2 py-1 rounded-md hover:bg-red-600 focus:outline-none"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* contact section */}
+
+        <div className="bg-white shadow-md rounded-lg p-4 overflow-x-auto mb-8">
+          <h2 className="text-xl font-bold mb-4 text-center">Contact Messages</h2>
+          <div className="max-h-96 overflow-y-auto">
+            <table className="w-full border-collapse">
+              <thead className="bg-gray-100">
+                <tr>
+                  <th className="p-2 border-b border-gray-300 text-sm">Contact ID</th>
+                  <th className="p-2 border-b border-gray-300 text-sm">Name</th>
+                  <th className="p-2 border-b border-gray-300 text-sm">Email</th>
+                  <th className="p-2 border-b border-gray-300 text-sm">Message</th>
+                  <th className="p-2 border-b border-gray-300 text-sm">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {contacts.map((contact) => (
+                  <tr key={contact._id} className="hover:bg-gray-100 text-sm">
+                    <td className="border-b border-gray-300 text-sm text-center">{contact._id}</td>
+                    <td className="border-b border-gray-300 text-sm text-center">{contact.name}</td>
+                    <td className="border-b border-gray-300 text-sm text-center">{contact.email}</td>
+                    <td className="border-b border-gray-300 text-sm text-center">{contact.message}</td>
+                    <td className="border-b border-gray-300 text-sm text-center">
+                      <button
+                        onClick={() => handleDeleteContact(contact._id)}
                         className="bg-red-500 text-white px-2 py-1 rounded-md hover:bg-red-600 focus:outline-none"
                       >
                         Delete
