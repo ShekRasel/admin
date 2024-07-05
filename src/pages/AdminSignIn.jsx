@@ -25,7 +25,7 @@ const AdminSignIn = () => {
     <div className="flex justify-center items-center min-h-screen bg-gray-100 px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col sm:flex-row w-full max-w-7xl bg-white rounded-lg shadow-lg overflow-hidden">
         <div className="sm:w-1/2 flex items-center justify-center p-4 sm:p-8">
-          <img src="images/signupPic.avif" alt="SignIn" className="h-64 sm:h-96 md:h-[750px] w-full object-cover rounded-lg" />
+          <img src="/images/signupPic.avif" alt="SignIn" className="h-64 sm:h-96 md:h-[750px] w-full object-cover rounded-lg" />
         </div>
         <div className="sm:w-1/2 flex items-center justify-center p-4 sm:p-8">
           <div className="max-w-lg w-full">
